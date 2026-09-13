@@ -8,7 +8,7 @@ import { data as data66_75 } from './tryout1-data6';
 
 export type AppQuestion = (typeof baseQuestions)[number] & {
   optionExplanations?: string[];
-  image?: string;
+  image?: string | null;
 };
 
 type TryoutRow = readonly [string, readonly string[], number, string, string, string];
