@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./dokter-jaga.css";
 import InteractiveBackground from "../components/InteractiveBackground";
 
 export const metadata: Metadata = {
-  title: "Bank Soal UKMPPD",
-  description: "Platform latihan soal UKMPPD",
+  title: "Dokter Jaga | Clinical Education & Practical Resources",
+  description: "Platform clinical education dan practical resources untuk dokter Indonesia.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
