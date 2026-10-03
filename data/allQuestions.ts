@@ -5,6 +5,10 @@ import { data as data36_45 } from './tryout1-data3';
 import { data as data46_55 } from './tryout1-data4';
 import { data as data56_65 } from './tryout1-data5';
 import { data as data66_75 } from './tryout1-data6';
+import { bedahSarafPart1 } from './bedahSarafPart1';
+import { bedahSarafPart2 } from './bedahSarafPart2';
+import { bedahSarafPart3 } from './bedahSarafPart3';
+import { bedahSarafPart4 } from './bedahSarafPart4';
 
 export type AppQuestion = (typeof baseQuestions)[number] & {
   optionExplanations?: string[];
@@ -41,4 +45,8 @@ export const questions: AppQuestion[] = [
   ...makeTryoutQuestions(data46_55, 46),
   ...makeTryoutQuestions(data56_65, 56),
   ...makeTryoutQuestions(data66_75, 66),
+  ...bedahSarafPart1,
+  ...bedahSarafPart2,
+  ...bedahSarafPart3,
+  ...bedahSarafPart4,
 ];
