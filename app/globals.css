@@ -190,3 +190,20 @@ kbd{border:1px solid #ccd5e1;background:#f6f8fb;border-radius:6px;padding:4px 7p
   .modalSheetGrid{grid-template-columns:repeat(4,1fr)}
   .quizBrandMeta{display:none}
 }
+
+
+.mobileQuickSheet{display:none}
+.mobileSheetHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px}
+.mobileSheetHead>div{display:flex;flex-direction:column;gap:2px}
+.mobileSheetHead b{font-size:12px}
+.mobileSheetHead span{font-size:9px;color:#8491a3}
+.mobileSheetHead button{border:0;background:transparent;color:#155eef;font-size:10px;font-weight:850}
+.mobileSheetGrid{display:grid;grid-template-columns:repeat(10,1fr);gap:5px}
+.mobileSheetNumber{height:31px;border:1px solid #dce3ec;background:#fff;border-radius:7px;font-size:9px;font-weight:900;color:#667085}
+.mobileSheetNumber.answered{background:#eef5ff;border-color:#aac3f5;color:#155eef}
+.mobileSheetNumber.flagged{background:#fff8eb;border-color:#f0c268;color:#946200}
+.mobileSheetNumber.current{box-shadow:0 0 0 2px #155eef inset}
+.mobileSheetHint{font-size:8px;color:#98a2b3;margin-top:8px}
+@media(max-width:650px){
+  .mobileQuickSheet{display:block;background:#fff;border:1px solid #e1e7ee;border-radius:12px;padding:11px;margin-bottom:10px;position:sticky;top:73px;z-index:12;box-shadow:0 5px 16px rgba(16,24,40,.05)}
+}
