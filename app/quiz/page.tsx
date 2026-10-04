@@ -237,6 +237,30 @@ export default function QuizPage() {
             </button>
           </div>
 
+          <div className="mobileQuickSheet">
+            <div className="mobileSheetHead">
+              <div><b>Nomor Soal</b><span>{answeredCount}/{quiz.length} terjawab</span></div>
+              <button onClick={() => setShowSheet(true)}>Lihat semua</button>
+            </div>
+            <div className="mobileSheetGrid">
+              {quiz.map((item, number) => {
+                const hasAnswer = answers[String(item.id)] !== undefined;
+                const isFlagged = !!flags[String(item.id)];
+                return (
+                  <button
+                    key={item.id}
+                    className={"mobileSheetNumber " + (number === index ? "current " : "") + (hasAnswer ? "answered " : "empty ") + (isFlagged ? "flagged " : "")}
+                    onClick={() => setIndex(number)}
+                    aria-label={`Lompat ke soal ${number + 1}`}
+                  >
+                    {number + 1}
+                  </button>
+                );
+              })}
+            </div>
+            <div className="mobileSheetHint">Klik nomor mana saja untuk langsung lompat ke soal tersebut.</div>
+          </div>
+
           <article className="questionCardV2">
             <div className="questionCategory">{q.department}</div>
             <h1>{q.question}</h1>
