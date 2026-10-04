@@ -700,13 +700,20 @@ button { font-family: inherit; }
 .bm{margin-left:auto;background:none;border:none;font-size:1.25rem;cursor:pointer}
 .qo.sel{border-color:var(--sp,#1b5e7b);background:var(--primary-10);font-weight:600}
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--card);padding:10px 20px;border-radius:24px;z-index:400;font-weight:600;font-size:.9rem;box-shadow:var(--shadow-md)}
-.exam{position:fixed;inset:0;z-index:300;background:var(--surface);overflow-y:auto;padding:max(20px,env(safe-area-inset-top)) 16px 28px}
-.ex-box{max-width:760px;margin:0 auto}.ex-top{display:flex;justify-content:space-between;align-items:center;font-size:1rem}
-.ex-tm{background:var(--accent-10);color:var(--accent);padding:4px 12px;border-radius:14px;font-weight:700}
-.ex-bar{background:var(--border)}.ex-bar i{background:var(--sp)}
-.ex-nav{display:flex;gap:10px;margin-top:20px}.ex-nav button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer}
-.ex-nav .go{background:var(--sp);color:#fff;border-color:var(--sp)}
-.ex-score{font-family:'Source Serif 4',serif;font-size:3.4rem;font-weight:700;color:var(--sp);text-align:center;margin-top:10px}
+.exam{position:fixed;inset:0;z-index:300;background:var(--surface);overflow-y:auto;padding:max(18px,env(safe-area-inset-top)) 18px 32px}
+.ex-box{max-width:760px;margin:0 auto}.ex-box-wide{max-width:1120px}
+.ex-top{display:flex;justify-content:space-between;align-items:center;font-size:1rem}.ex-top-v2{margin-bottom:10px}
+.ex-title{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}.ex-title>b{font-size:1.05rem}.ex-title small{width:100%;font-size:.73rem;color:var(--ink-secondary);margin-left:0}.ex-kicker{font-size:.66rem;font-weight:800;letter-spacing:.08em;color:var(--sp);text-transform:uppercase;background:var(--sp-10,var(--primary-10));padding:4px 7px;border-radius:6px}
+.ex-actions-top{display:flex;align-items:center;gap:10px}.ex-tm{background:var(--accent-10);color:var(--accent);padding:6px 12px;border-radius:15px;font-weight:800}.ex-tm.danger{background:var(--red-10,var(--accent-10));color:var(--red,var(--accent))}
+.ex-close{width:34px;height:34px;border:0;background:none;color:var(--ink);font-size:1.05rem;cursor:pointer}
+.ex-bar{background:var(--border);margin-bottom:14px}.ex-bar i{background:var(--sp)}
+.ex-layout{display:grid;grid-template-columns:minmax(0,1fr) 285px;gap:16px;align-items:start}.ex-main{min-width:0}
+.ex-question-card{margin:0;cursor:default}.ex-question-meta{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:13px;color:var(--ink-secondary);font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.ex-flag{border:1px solid var(--border);background:var(--surface);color:var(--ink-secondary);border-radius:9px;padding:7px 9px;font-size:.7rem;font-weight:700;cursor:pointer;text-transform:none;letter-spacing:0}.ex-flag.active{background:var(--amber-light);border-color:var(--amber,#f2c94c);color:#9a6700}
+.ex-sheet{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:15px;position:sticky;top:10px;box-shadow:var(--shadow-sm)}.ex-sheet-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.ex-sheet-head b{display:block;font-size:.92rem}.ex-sheet-head small{display:block;color:var(--ink-secondary);font-size:.68rem;margin-top:3px}.ex-sheet-head>span{background:var(--sp-10,var(--primary-10));color:var(--sp);padding:5px 8px;border-radius:999px;font-size:.7rem;font-weight:800}
+.ex-sheet-legend{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0;font-size:.62rem;color:var(--ink-secondary)}.ex-sheet-legend span{display:flex;align-items:center;gap:4px}.ex-sheet-legend i{width:9px;height:9px;border-radius:3px;border:1px solid var(--border);display:inline-block}.ex-sheet-legend i.answered{background:var(--sp);border-color:var(--sp)}.ex-sheet-legend i.flagged{background:var(--amber-light);border-color:var(--amber,#f2c94c)}.ex-sheet-legend i.empty{background:var(--card)}
+.ex-number-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.ex-number{height:38px;border:1px solid var(--border);background:var(--card);color:var(--ink-secondary);border-radius:8px;font-weight:800;font-size:.72rem;cursor:pointer;position:relative}.ex-number:hover{border-color:var(--sp);color:var(--sp)}.ex-number.answered{background:var(--sp-10,var(--primary-10));border-color:var(--sp);color:var(--sp)}.ex-number.current{box-shadow:0 0 0 2px var(--sp) inset}.ex-number.flagged{background:var(--amber-light);border-color:var(--amber,#f2c94c);color:#9a6700}.ex-number small{position:absolute;top:2px;right:3px;font-size:.5rem}.ex-sheet-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:13px 0 10px;padding-top:11px;border-top:1px solid var(--border)}.ex-sheet-summary span{font-size:.62rem;color:var(--ink-secondary)}.ex-sheet-summary b{display:block;color:var(--ink);font-size:.85rem;margin-top:2px}.ex-review-btn{width:100%;padding:10px;border-radius:9px;border:0;background:var(--sp);color:#fff;font-weight:800;font-size:.72rem;cursor:pointer}
+.ex-nav{display:flex;gap:10px;margin-top:14px}.ex-nav button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer}.ex-nav .go{background:var(--sp);color:#fff;border-color:var(--sp)}
+.exam-review-overlay{position:fixed;inset:0;z-index:330;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:18px}.exam-review-card{width:min(470px,100%);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-lg,var(--shadow-md))}.exam-review-head{display:flex;justify-content:space-between;align-items:flex-start}.exam-review-head h3{margin:6px 0 0;font-size:1.15rem}.exam-review-head button{border:0;background:none;font-size:1rem;cursor:pointer;color:var(--ink)}.exam-review-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.exam-review-stats div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px;text-align:center}.exam-review-stats b{display:block;font-size:1.25rem}.exam-review-stats span{font-size:.62rem;color:var(--ink-secondary)}.exam-warning,.exam-good{padding:10px 12px;border-radius:9px;font-size:.72rem;line-height:1.5}.exam-warning{background:var(--amber-light);color:#8a6100}.exam-good{background:var(--green-10);color:var(--green)}.exam-review-actions{display:flex;gap:8px;margin-top:16px}.exam-review-actions button{flex:1;padding:11px;border-radius:9px;border:1px solid var(--border);background:var(--card);font-weight:700;cursor:pointer}.exam-review-actions .go{background:var(--sp);color:#fff;border-color:var(--sp)}
 .modal-actions {
   display: flex;
   gap: 10px;
@@ -1627,18 +1634,57 @@ const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 function startExam(){
   const idx=QB.map((x,i)=>i).filter(i=>QB[i].s===activeSpec).sort(()=>Math.random()-.5).slice(0,10);
   if(!idx.length)return;
-  EX={pool:idx,a:{},c:0,left:idx.length*90};
+  EX={pool:idx,a:{},flags:{},c:0,left:idx.length*90};
   const d=document.createElement('div');d.id='exam';d.className='exam';document.body.appendChild(d);
   EX.t=setInterval(()=>{EX.left--;if(EX.left<=0)finishExam();else{const e=document.getElementById('ex-t');if(e)e.textContent=fmt(EX.left);}},1000);
   drawExam();
 }
 function drawExam(){
   const i=EX.pool[EX.c],x=QB[i],n=EX.pool.length,last=EX.c===n-1;
-  document.getElementById('exam').innerHTML='<div class="ex-box"><div class="ex-top"><b>Soal '+(EX.c+1)+' / '+n+'</b><span class="ex-tm">⏱️ <span id="ex-t">'+fmt(EX.left)+'</span></span><button class="bm" style="margin:0" onclick="closeExam(true)">✕</button></div><div class="qb-bar ex-bar"><i style="width:'+((EX.c+1)/n*100)+'%"></i></div><div class="question-card" style="margin-top:16px"><div class="qc-text">'+x.q+'</div>'+
-  x.o.map((o,k)=>'<button class="qo'+(EX.a[i]===k?' sel':'')+'" onclick="exPick('+k+')"><span class="ol oc'+k+'">'+String.fromCharCode(65+k)+'</span><span>'+o+'</span></button>').join('')+'</div><div class="ex-nav">'+(EX.c?'<button onclick="exGo(-1)">← Sebelumnya</button>':'')+(last?'<button class="go" onclick="finishExam()">Selesai ✓</button>':'<button class="go" onclick="exGo(1)">Berikutnya →</button>')+'</div></div>';
+  const answered=Object.keys(EX.a).length;
+  const flagged=Object.keys(EX.flags||{}).filter(k=>EX.flags[k]).length;
+  const unanswered=n-answered;
+  document.getElementById('exam').innerHTML='<div class="ex-box ex-box-wide">'+
+    '<div class="ex-top ex-top-v2">'+
+      '<div class="ex-title"><span class="ex-kicker">SIMULASI CBT</span><b>Soal '+(EX.c+1)+' / '+n+'</b><small>'+answered+' terjawab · '+unanswered+' kosong</small></div>'+
+      '<div class="ex-actions-top"><span class="ex-tm '+(EX.left<=120?'danger':'')+'">⏱️ <span id="ex-t">'+fmt(EX.left)+'</span></span><button class="ex-close" onclick="closeExam(true)" aria-label="Tutup">✕</button></div>'+
+    '</div>'+
+    '<div class="qb-bar ex-bar"><i style="width:'+((EX.c+1)/n*100)+'%"></i></div>'+
+    '<div class="ex-layout">'+
+      '<div class="ex-main">'+
+        '<div class="question-card ex-question-card">'+
+          '<div class="ex-question-meta"><span>Question '+String(EX.c+1).padStart(2,'0')+'</span><button class="ex-flag '+((EX.flags&&EX.flags[i])?'active':'')+'" onclick="exToggleFlag()">'+((EX.flags&&EX.flags[i])?'★ Ragu':'☆ Tandai ragu')+'</button></div>'+
+          '<div class="qc-text">'+x.q+'</div>'+
+          (x.o||[]).map((o,k)=>'<button class="qo'+(EX.a[i]===k?' sel':'')+'" onclick="exPick('+k+')"><span class="ol oc'+k+'">'+String.fromCharCode(65+k)+'</span><span>'+o+'</span></button>').join('')+
+        '</div>'+
+        '<div class="ex-nav">'+(EX.c?'<button onclick="exGo(-1)">← Sebelumnya</button>':'<span></span>')+(last?'<button class="go" onclick="showExamReview()">Review &amp; Submit ✓</button>':'<button class="go" onclick="exGo(1)">Berikutnya →</button>')+'</div>'+
+      '</div>'+
+      '<aside class="ex-sheet">'+
+        '<div class="ex-sheet-head"><div><b>Daftar Soal</b><small>Klik nomor untuk lompat</small></div><span>'+answered+'/'+n+'</span></div>'+
+        '<div class="ex-sheet-legend"><span><i class="answered"></i> Terjawab</span><span><i class="flagged"></i> Ragu</span><span><i class="empty"></i> Kosong</span></div>'+
+        '<div class="ex-number-grid">'+EX.pool.map((item,num)=>{const has=EX.a[item]!==undefined,fl=EX.flags&&EX.flags[item];return '<button class="ex-number '+(num===EX.c?'current ':'')+(has?'answered ':'')+(fl?'flagged ':'')+'" onclick="exJump('+num+')" aria-label="Soal '+(num+1)+'">'+(num+1)+(fl?'<small>★</small>':'')+'</button>';}).join('')+'</div>'+
+        '<div class="ex-sheet-summary"><span>Terjawab <b>'+answered+'</b></span><span>Kosong <b>'+unanswered+'</b></span><span>Ragu <b>'+flagged+'</b></span></div>'+
+        '<button class="ex-review-btn" onclick="showExamReview()">Review &amp; Submit</button>'+
+      '</aside>'+
+    '</div>'+
+  '</div>';
 }
 function exPick(k){EX.a[EX.pool[EX.c]]=k;drawExam();}
+function exJump(n){EX.c=n;drawExam();}
+function exToggleFlag(){const id=EX.pool[EX.c];EX.flags[id]=!EX.flags[id];drawExam();}
 function exGo(d){EX.c+=d;drawExam();}
+function showExamReview(){showExamReviewModal();}
+function showExamReviewModal(){
+  const answered=Object.keys(EX.a).length,n=EX.pool.length,flagged=Object.keys(EX.flags||{}).filter(k=>EX.flags[k]).length;
+  const old=document.getElementById('exam-review');
+  if(old)old.remove();
+  const d=document.createElement('div');d.id='exam-review';d.className='exam-review-overlay';
+  d.innerHTML='<div class="exam-review-card"><div class="exam-review-head"><div><span class="ex-kicker">FINAL CHECK</span><h3>Periksa sebelum mengirim</h3></div><button onclick="document.getElementById(\'exam-review\').remove()">✕</button></div>'+
+    '<div class="exam-review-stats"><div><b>'+answered+'</b><span>Terjawab</span></div><div><b>'+(n-answered)+'</b><span>Kosong</span></div><div><b>'+flagged+'</b><span>Ragu</span></div></div>'+
+    ((n-answered)?'<div class="exam-warning">Masih ada '+(n-answered)+' soal yang belum dijawab. Anda tetap dapat mengirim tryout.</div>':'<div class="exam-good">Semua soal sudah dijawab.</div>')+
+    '<div class="exam-review-actions"><button onclick="document.getElementById(\'exam-review\').remove()">Kembali</button><button class="go" onclick="document.getElementById(\'exam-review\').remove();finishExam()">Kirim Tryout ✓</button></div></div>';
+  document.body.appendChild(d);
+}
 function closeExam(ask){if(ask&&!confirm('Keluar dari mode ujian? Jawabanmu tidak disimpan.'))return;clearInterval(EX.t);document.getElementById('exam').remove();EX=null;renderQB();}
 function finishExam(){
   clearInterval(EX.t);
