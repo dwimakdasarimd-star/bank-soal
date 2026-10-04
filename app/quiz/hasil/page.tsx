@@ -85,7 +85,7 @@ export default function QuizResultPage() {
       <section className="resultV2Hero">
         <button className="resultBack" onClick={() => router.push("/bank-soal")}>← Kembali ke bank soal</button>
         <div className="resultEyebrow">{mode === "cbt" ? "TRYOUT CBT SELESAI" : "LATIHAN SELESAI"}</div>
-        <div className="scoreRing"><div><strong>{score}</strong><span>/100</span></div></div>
+        <div className="scoreRing" style={{ background: `conic-gradient(#155eef ${score * 3.6}deg, #e6ecf5 ${score * 3.6}deg)` }}><div><strong>{score}</strong><span>/100</span></div></div>
         <h1>{level}</h1>
         <p>{correct} benar dari {rows.length} soal • {wrong} salah • {blank} kosong</p>
       </section>
