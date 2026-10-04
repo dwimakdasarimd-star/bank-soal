@@ -1635,11 +1635,18 @@ const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 function startExam(){
   const idx=QB.map((x,i)=>i).filter(i=>QB[i].s===activeSpec).sort(()=>Math.random()-.5).slice(0,10);
   if(!idx.length)return;
-  EX={pool:idx,a:{},flags:{},c:0,left:idx.length*90,spec:activeSpec};
-  store('mp_exam_state',JSON.stringify({pool:EX.pool,a:EX.a,flags:EX.flags,c:EX.c,left:EX.left,spec:EX.spec}));
-
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem('mp_exam_state')||'null')}catch(e){saved=null}
+  const canResume=saved&&saved.spec===activeSpec&&Array.isArray(saved.pool)&&saved.pool.length;
+  if(canResume){
+    const elapsed=Math.max(0,Math.floor((Date.now()-(saved.savedAt||Date.now()))/1000));
+    EX={pool:saved.pool,a:saved.a||{},flags:saved.flags||{},c:Math.min(saved.c||0,saved.pool.length-1),left:Math.max(0,(saved.left||0)-elapsed),spec:saved.spec};
+  }else{
+    EX={pool:idx,a:{},flags:{},c:0,left:idx.length*90,spec:activeSpec};
+  }
+  saveExamState();
   const d=document.createElement('div');d.id='exam';d.className='exam';document.body.appendChild(d);
-  EX.t=setInterval(()=>{EX.left--;if(EX.left<=0)finishExam();else{const e=document.getElementById('ex-t');if(e)e.textContent=fmt(EX.left);}},1000);
+  EX.t=setInterval(()=>{EX.left--;if(EX.left<=0)finishExam();else{const e=document.getElementById('ex-t');if(e)e.textContent=fmt(EX.left);if(EX.left%5===0)saveExamState();}},1000);
   drawExam();
 }
 function drawExam(){
@@ -1673,7 +1680,7 @@ function drawExam(){
   '</div>';
 }
 function saveExamState(){
-  try{store('mp_exam_state',JSON.stringify({pool:EX.pool,a:EX.a,flags:EX.flags,c:EX.c,left:EX.left,spec:EX.spec}));}catch(e){}
+  try{store('mp_exam_state',{pool:EX.pool,a:EX.a,flags:EX.flags,c:EX.c,left:EX.left,spec:EX.spec,savedAt:Date.now()});}catch(e){}
 }
 function exPick(k){EX.a[EX.pool[EX.c]]=k;saveExamState();drawExam();}
 function exJump(n){EX.c=n;saveExamState();drawExam();}
@@ -1697,7 +1704,7 @@ function showExamReviewModal(){
 }
 function reviewJump(n){document.getElementById('exam-review')?.remove();exJump(n);}
 
-function closeExam(ask){if(ask&&!confirm('Keluar dari mode ujian? Jawabanmu tidak disimpan.'))return;clearInterval(EX.t);try{localStorage.removeItem('mp_exam_state')}catch(e){}document.getElementById('exam').remove();EX=null;renderQB();}
+function closeExam(ask){if(ask&&!confirm('Keluar dari mode ujian? Progres dan tanda Ragu akan disimpan untuk dilanjutkan.'))return;clearInterval(EX.t);saveExamState();document.getElementById('exam').remove();EX=null;renderQB();}
 function finishExam(){
   clearInterval(EX.t);
   try{localStorage.removeItem('mp_exam_state')}catch(e){}
