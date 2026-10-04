@@ -713,6 +713,7 @@ button { font-family: inherit; }
 .ex-sheet-legend{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0;font-size:.62rem;color:var(--ink-secondary)}.ex-sheet-legend span{display:flex;align-items:center;gap:4px}.ex-sheet-legend i{width:9px;height:9px;border-radius:3px;border:1px solid var(--border);display:inline-block}.ex-sheet-legend i.answered{background:var(--sp);border-color:var(--sp)}.ex-sheet-legend i.flagged{background:var(--amber-light);border-color:var(--amber,#f2c94c)}.ex-sheet-legend i.empty{background:var(--card)}
 .ex-number-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.ex-number{height:38px;border:1px solid var(--border);background:var(--card);color:var(--ink-secondary);border-radius:8px;font-weight:800;font-size:.72rem;cursor:pointer;position:relative}.ex-number:hover{border-color:var(--sp);color:var(--sp)}.ex-number.answered{background:var(--sp-10,var(--primary-10));border-color:var(--sp);color:var(--sp)}.ex-number.current{box-shadow:0 0 0 2px var(--sp) inset}.ex-number.flagged{background:var(--amber-light);border-color:var(--amber,#f2c94c);color:#9a6700}.ex-number small{position:absolute;top:2px;right:3px;font-size:.5rem}.ex-sheet-summary{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin:13px 0 10px;padding-top:11px;border-top:1px solid var(--border)}.ex-sheet-summary span{font-size:.62rem;color:var(--ink-secondary)}.ex-sheet-summary b{display:block;color:var(--ink);font-size:.85rem;margin-top:2px}.ex-review-btn{width:100%;padding:10px;border-radius:9px;border:0;background:var(--sp);color:#fff;font-weight:800;font-size:.72rem;cursor:pointer}
 .ex-nav{display:flex;gap:10px;margin-top:14px}.ex-nav button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--ink);font-weight:600;cursor:pointer}.ex-nav .go{background:var(--sp);color:#fff;border-color:var(--sp)}
+.review-jump-box{margin-top:12px;padding:11px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}.review-jump-box>b{font-size:.68rem;color:var(--ink-secondary)}.review-jump-grid{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}.review-jump-grid button{border:1px solid var(--border);background:var(--card);color:var(--ink);border-radius:7px;padding:6px 8px;font-size:.65rem;font-weight:800;cursor:pointer}.review-jump-grid button:hover{border-color:var(--sp);color:var(--sp)}
 .exam-review-overlay{position:fixed;inset:0;z-index:330;background:rgba(0,0,0,.45);display:grid;place-items:center;padding:18px}.exam-review-card{width:min(470px,100%);background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:var(--shadow-lg,var(--shadow-md))}.exam-review-head{display:flex;justify-content:space-between;align-items:flex-start}.exam-review-head h3{margin:6px 0 0;font-size:1.15rem}.exam-review-head button{border:0;background:none;font-size:1rem;cursor:pointer;color:var(--ink)}.exam-review-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:17px 0}.exam-review-stats div{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:11px;text-align:center}.exam-review-stats b{display:block;font-size:1.25rem}.exam-review-stats span{font-size:.62rem;color:var(--ink-secondary)}.exam-warning,.exam-good{padding:10px 12px;border-radius:9px;font-size:.72rem;line-height:1.5}.exam-warning{background:var(--amber-light);color:#8a6100}.exam-good{background:var(--green-10);color:var(--green)}.exam-review-actions{display:flex;gap:8px;margin-top:16px}.exam-review-actions button{flex:1;padding:11px;border-radius:9px;border:1px solid var(--border);background:var(--card);font-weight:700;cursor:pointer}.exam-review-actions .go{background:var(--sp);color:#fff;border-color:var(--sp)}
 .modal-actions {
   display: flex;
@@ -1634,9 +1635,18 @@ const fmt=s=>Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
 function startExam(){
   const idx=QB.map((x,i)=>i).filter(i=>QB[i].s===activeSpec).sort(()=>Math.random()-.5).slice(0,10);
   if(!idx.length)return;
-  EX={pool:idx,a:{},flags:{},c:0,left:idx.length*90};
+  let saved=null;
+  try{saved=JSON.parse(localStorage.getItem('mp_exam_state')||'null')}catch(e){saved=null}
+  const canResume=saved&&saved.spec===activeSpec&&Array.isArray(saved.pool)&&saved.pool.length;
+  if(canResume){
+    const elapsed=Math.max(0,Math.floor((Date.now()-(saved.savedAt||Date.now()))/1000));
+    EX={pool:saved.pool,a:saved.a||{},flags:saved.flags||{},c:Math.min(saved.c||0,saved.pool.length-1),left:Math.max(0,(saved.left||0)-elapsed),spec:saved.spec};
+  }else{
+    EX={pool:idx,a:{},flags:{},c:0,left:idx.length*90,spec:activeSpec};
+  }
+  saveExamState();
   const d=document.createElement('div');d.id='exam';d.className='exam';document.body.appendChild(d);
-  EX.t=setInterval(()=>{EX.left--;if(EX.left<=0)finishExam();else{const e=document.getElementById('ex-t');if(e)e.textContent=fmt(EX.left);}},1000);
+  EX.t=setInterval(()=>{EX.left--;if(EX.left<=0)finishExam();else{const e=document.getElementById('ex-t');if(e)e.textContent=fmt(EX.left);if(EX.left%5===0)saveExamState();}},1000);
   drawExam();
 }
 function drawExam(){
@@ -1669,25 +1679,35 @@ function drawExam(){
     '</div>'+
   '</div>';
 }
-function exPick(k){EX.a[EX.pool[EX.c]]=k;drawExam();}
-function exJump(n){EX.c=n;drawExam();}
-function exToggleFlag(){const id=EX.pool[EX.c];EX.flags[id]=!EX.flags[id];drawExam();}
-function exGo(d){EX.c+=d;drawExam();}
+function saveExamState(){
+  try{store('mp_exam_state',{pool:EX.pool,a:EX.a,flags:EX.flags,c:EX.c,left:EX.left,spec:EX.spec,savedAt:Date.now()});}catch(e){}
+}
+function exPick(k){EX.a[EX.pool[EX.c]]=k;saveExamState();drawExam();}
+function exJump(n){EX.c=n;saveExamState();drawExam();}
+function exToggleFlag(){const id=EX.pool[EX.c];EX.flags[id]=!EX.flags[id];saveExamState();drawExam();}
+function exGo(d){EX.c=Math.max(0,Math.min(EX.pool.length-1,EX.c+d));saveExamState();drawExam();}
 function showExamReview(){showExamReviewModal();}
 function showExamReviewModal(){
   const answered=Object.keys(EX.a).length,n=EX.pool.length,flagged=Object.keys(EX.flags||{}).filter(k=>EX.flags[k]).length;
+  const flaggedNumbers=EX.pool.map((id,pos)=>EX.flags[id]?pos+1:null).filter(Boolean);
+  const unansweredNumbers=EX.pool.map((id,pos)=>EX.a[id]===undefined?pos+1:null).filter(Boolean);
   const old=document.getElementById('exam-review');
   if(old)old.remove();
   const d=document.createElement('div');d.id='exam-review';d.className='exam-review-overlay';
   d.innerHTML='<div class="exam-review-card"><div class="exam-review-head"><div><span class="ex-kicker">FINAL CHECK</span><h3>Periksa sebelum mengirim</h3></div><button onclick="document.getElementById(\'exam-review\').remove()">✕</button></div>'+
     '<div class="exam-review-stats"><div><b>'+answered+'</b><span>Terjawab</span></div><div><b>'+(n-answered)+'</b><span>Kosong</span></div><div><b>'+flagged+'</b><span>Ragu</span></div></div>'+
-    ((n-answered)?'<div class="exam-warning">Masih ada '+(n-answered)+' soal yang belum dijawab. Anda tetap dapat mengirim tryout.</div>':'<div class="exam-good">Semua soal sudah dijawab.</div>')+
+    ((n-answered)?'<div class="exam-warning">Masih ada '+(n-answered)+' soal yang belum dijawab.</div>':'<div class="exam-good">Semua soal sudah dijawab.</div>')+
+    (flaggedNumbers.length?'<div class="review-jump-box"><b>Soal ditandai ragu</b><div class="review-jump-grid">'+flaggedNumbers.map(num=>'<button onclick="reviewJump('+((num-1))+')">'+num+' ★</button>').join('')+'</div></div>':'')+
+    (unansweredNumbers.length?'<div class="review-jump-box"><b>Soal belum dijawab</b><div class="review-jump-grid">'+unansweredNumbers.map(num=>'<button onclick="reviewJump('+((num-1))+')">'+num+'</button>').join('')+'</div></div>':'')+
     '<div class="exam-review-actions"><button onclick="document.getElementById(\'exam-review\').remove()">Kembali</button><button class="go" onclick="document.getElementById(\'exam-review\').remove();finishExam()">Kirim Tryout ✓</button></div></div>';
   document.body.appendChild(d);
 }
-function closeExam(ask){if(ask&&!confirm('Keluar dari mode ujian? Jawabanmu tidak disimpan.'))return;clearInterval(EX.t);document.getElementById('exam').remove();EX=null;renderQB();}
+function reviewJump(n){document.getElementById('exam-review')?.remove();exJump(n);}
+
+function closeExam(ask){if(ask&&!confirm('Keluar dari mode ujian? Progres dan tanda Ragu akan disimpan untuk dilanjutkan.'))return;clearInterval(EX.t);saveExamState();document.getElementById('exam').remove();EX=null;renderQB();}
 function finishExam(){
   clearInterval(EX.t);
+  try{localStorage.removeItem('mp_exam_state')}catch(e){}
   const ok=EX.pool.filter(i=>EX.a[i]===QB[i].a).length,n=EX.pool.length,p=Math.round(ok/n*100);
   EX.pool.forEach(i=>{if(EX.a[i]!==undefined)ans[i]=EX.a[i]});xp+=ok*5;save();
   document.getElementById('exam').innerHTML='<div class="ex-box"><div class="ex-score">'+p+'%</div><p style="text-align:center">'+ok+' dari '+n+' benar · +'+ok*5+' XP · '+(p>=80?'Luar biasa! 🌟':p>=60?'Bagus, tinggal sedikit lagi 💪':'Tetap semangat, pembahasan di bawah akan membantu 📚')+'</p>'+
