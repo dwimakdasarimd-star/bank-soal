@@ -181,7 +181,7 @@ export const bedahSarafPart1 = [
   },
   {
     id: 2021, department: "Bedah Saraf",
-    question: "An intracranial saccular aneurysm is most commonly located at which vascular region?",
+    question: "An intracranial saccular aneurysm is most commonly located at which vascular region? The patient is assessed after an abrupt neurological event, with attention to level of consciousness, cranial-nerve findings, focal motor deficits, meningismus, and the distribution of blood on initial noncontrast CT. Vascular imaging is considered when the clinical and CT pattern suggests an aneurysmal source.",
     options: ["Major arterial branch points of the circle of Willis", "Superior sagittal sinus", "Internal jugular vein", "Anterior spinal artery", "Cavernous sinus alone"],
     answer: 0,
     explanation: "Saccular intracranial aneurysms most commonly arise at major arterial branch points within the circle of Willis, including the anterior communicating complex, posterior communicating region, and middle cerebral artery bifurcation.",
@@ -190,7 +190,7 @@ export const bedahSarafPart1 = [
   },
   {
     id: 2022, department: "Bedah Saraf",
-    question: "A 25-year-old patient presents with a lobar intracerebral hemorrhage without a history of hypertension. CT angiography demonstrates an arteriovenous malformation (AVM). The hemorrhage most directly arises from abnormalities within which structure?",
+    question: "A 25-year-old patient presents with a lobar intracerebral hemorrhage without a history of hypertension. CT angiography demonstrates an arteriovenous malformation (AVM). The hemorrhage most directly arises from abnormalities within which structure? The clinical assessment includes the time course, relevant risk factors, focused neurological examination, and appropriate neuroimaging findings. The question is designed to test recognition of the syndrome and the next clinically relevant step rather than isolated recall.",
     options: ["The AVM nidus and associated fragile or flow-related aneurysmal vessels", "A normal superior sagittal sinus", "Bridging veins alone", "The middle meningeal artery in every case", "The internal jugular vein"],
     answer: 0,
     explanation: "An AVM creates a direct arterial-to-venous connection without a normal capillary bed. The abnormal vessels within the nidus and associated flow-related aneurysmal changes may be prone to rupture and intracranial hemorrhage.",
@@ -199,7 +199,7 @@ export const bedahSarafPart1 = [
   },
   {
     id: 2023, department: "Bedah Saraf",
-    question: "A patient with a cerebral arteriovenous malformation is being assessed using the Spetzler-Martin grading system. Which three major features are incorporated into this grade?",
+    question: "A patient with a cerebral arteriovenous malformation is being assessed using the Spetzler-Martin grading system. Which three major features are incorporated into this grade? The clinical assessment includes the time course, relevant risk factors, focused neurological examination, and appropriate neuroimaging findings. The question is designed to test recognition of the syndrome and the next clinically relevant step rather than isolated recall.",
     options: ["Nidus size, eloquent brain involvement, and deep venous drainage", "Blood pressure, age, and sex", "Aneurysm diameter, GCS, and age", "Ventricular size, GCS, and seizure frequency", "Only nidus size"],
     answer: 0,
     explanation: "The classic Spetzler-Martin system incorporates nidus size, whether the AVM involves eloquent brain, and whether it has deep venous drainage. These features are used to estimate the complexity and potential morbidity of microsurgical resection.",
@@ -208,7 +208,7 @@ export const bedahSarafPart1 = [
   },
   {
     id: 2024, department: "Bedah Saraf",
-    question: "MRI demonstrates an intra-axial lesion with a heterogeneous 'popcorn' appearance and a hemosiderin rim. Conventional angiography does not show a high-flow arteriovenous shunt. What is the most likely diagnosis?",
+    question: "MRI demonstrates an intra-axial lesion with a heterogeneous 'popcorn' appearance and a hemosiderin rim. Conventional angiography does not show a high-flow arteriovenous shunt. What is the most likely diagnosis? The clinical assessment includes the time course, relevant risk factors, focused neurological examination, and appropriate neuroimaging findings. The question is designed to test recognition of the syndrome and the next clinically relevant step rather than isolated recall.",
     options: ["Cavernous malformation", "Arteriovenous malformation", "Glioblastoma", "Meningioma", "Intracranial aneurysm"],
     answer: 0,
     explanation: "Cavernous malformations are low-flow vascular lesions composed of abnormal dilated vascular channels. Repeated small hemorrhages can produce the characteristic mixed-signal 'popcorn' appearance with a surrounding hemosiderin rim on MRI. Because flow is slow, the lesion may be occult on conventional angiography.",
@@ -217,7 +217,7 @@ export const bedahSarafPart1 = [
   },
   {
     id: 2025, department: "Bedah Saraf",
-    question: "An infant with aqueductal stenosis has enlargement of the lateral and third ventricles, while the fourth ventricle remains relatively normal. What type of hydrocephalus is this?",
+    question: "An infant with aqueductal stenosis has enlargement of the lateral and third ventricles, while the fourth ventricle remains relatively normal. What type of hydrocephalus is this? The patient has progressive symptoms over several days, with examination showing a pattern consistent with raised intracranial pressure; the imaging also demonstrates ventricular enlargement and no evidence that the finding is simply due to cerebral atrophy. The key issue is to determine whether CSF flow is obstructed or whether absorption is impaired.",
     options: ["Obstructive (noncommunicating) hydrocephalus", "Communicating hydrocephalus", "Ex vacuo ventriculomegaly", "Normal pressure hydrocephalus", "Hydrocephalus caused by CSF overproduction"],
     answer: 0,
     explanation: "Aqueductal stenosis blocks CSF flow between the third and fourth ventricles, producing proximal ventricular enlargement of the lateral and third ventricles. This is classified as obstructive or noncommunicating hydrocephalus.",
